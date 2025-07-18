@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频下载器</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎥 视频下载器</h1>
+            <p>支持多个平台的视频/音频下载</p>
+        </header>
+
+        <main>
+            <!-- 下载表单 -->
+            <section class="download-form">
+                <h2>📥 新建下载任务</h2>
+                <form id="downloadForm">
+                    <div class="form-group">
+                        <label for="url">视频链接:</label>
+                        <input type="url" id="url" name="url" placeholder="https://www.youtube.com/watch?v=..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="format">质量选择:</label>
+                        <select id="format" name="format">
+                            <option value="best">最佳质量</option>
+                            <option value="worst">最低质量</option>
+                            <option value="bestvideo+bestaudio">最佳视频+音频</option>
+                            <option value="bestaudio">仅音频（最佳）</option>
+                            <option value="mp4">MP4格式</option>
+                            <option value="webm">WebM格式</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="audioOnly" name="audioOnly">
+                            仅下载音频
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">开始下载</button>
+                </form>
+            </section>
+
+            <!-- 任务列表 -->
+            <section class="job-list">
+                <h2>📋 下载任务</h2>
+                <div class="controls">
+                    <button id="refreshBtn" class="btn-secondary">🔄 刷新</button>
+                    <button id="clearCompletedBtn" class="btn-secondary">🗑️ 清理已完成</button>
+                </div>
+                <div id="jobsList" class="jobs-container">
+                    <!-- 任务项将由 JavaScript 动态添加 -->
+                </div>
+            </section>
+        </main>
+
+        <!-- 状态显示 -->
+        <div id="statusMessage" class="status-message hidden"></div>
+        
+        <!-- 视频信息模态框 -->
+        <div id="videoInfoModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>📹 视频信息</h3>
+                <div id="videoInfoContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

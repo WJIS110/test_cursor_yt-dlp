@@ -128,7 +128,11 @@ class VideoDownloader:
         except Exception as e:
             return {
                 'status': 'failed',
-                'error': str(e)
+                'error': str(e),
+                'title': None,
+                'filename': None,
+                'filepath': None,
+                'size': 0
             }
         finally:
             # 清理取消事件

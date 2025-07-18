@@ -44,14 +44,34 @@ video-downloader/
 
 ## 安装与运行
 
-### 1. 安装依赖
+### 1. 环境准备
+
+```bash
+# 克隆或下载项目后，进入项目目录
+cd video-downloader
+
+# 创建虚拟环境（推荐）
+python3 -m venv venv
+
+# 激活虚拟环境
+source venv/bin/activate  # Linux/macOS
+# 或 venv\Scripts\activate  # Windows
+```
+
+### 2. 安装依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. 启动服务器
+### 3. 启动服务器
 
+#### 方法一：使用启动脚本（推荐，包含错误检查）
+```bash
+python start_server.py
+```
+
+#### 方法二：直接使用 uvicorn
 ```bash
 # 开发模式
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
@@ -60,11 +80,38 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-### 3. 访问界面
+### 4. 访问界面
 
 - **Web 界面**: http://localhost:8000
 - **API 文档**: http://localhost:8000/docs
 - **局域网访问**: http://[你的IP]:8000
+
+### 5. 使用方法
+
+#### Web 界面使用
+1. 打开浏览器访问 http://localhost:8000
+2. 在表单中输入视频链接
+3. 选择下载格式和质量
+4. 点击"开始下载"
+5. 在任务列表中查看进度和管理下载
+
+#### 代码调用方式
+```python
+from core.job_manager import JobManager
+
+# 创建管理器
+manager = JobManager()
+
+# 创建下载任务
+job_id = manager.create_job("https://example.com/video.mp4")
+
+# 开始下载
+manager.start_download(job_id)
+
+# 查询状态
+status = manager.get_job_status(job_id)
+print(f"状态: {status.status.value}, 进度: {status.progress}%")
+```
 
 ## API 使用示例
 

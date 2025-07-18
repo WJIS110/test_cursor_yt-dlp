@@ -1,7 +1,7 @@
 import threading
 import uuid
 from datetime import datetime
-from typing import Dict, List, Optional, Callable
+from typing import Dict, List, Optional, Callable, Any
 from api.models import JobStatus, JobStatusResponse
 from core.downloader import VideoDownloader
 
@@ -115,16 +115,19 @@ class JobManager:
                 if job_id in self.jobs:
                     job = self.jobs[job_id]
                     
-                    if result['status'] == 'completed':
+                    if result and result.get('status') == 'completed':
                         job['status'] = JobStatus.COMPLETED
                         job['progress'] = 100.0
                         job['title'] = result.get('title')
                         job['filename'] = result.get('filename')
-                    elif result['status'] == 'cancelled':
+                    elif result and result.get('status') == 'cancelled':
                         job['status'] = JobStatus.CANCELLED
                     else:
                         job['status'] = JobStatus.FAILED
-                        job['error_message'] = result.get('error', '下载失败')
+                        if result:
+                            job['error_message'] = result.get('error', '下载失败')
+                        else:
+                            job['error_message'] = '下载失败：未知错误'
                     
                     job['updated_at'] = datetime.now()
             
@@ -197,6 +200,18 @@ class JobManager:
                 created_at=job['created_at'],
                 updated_at=job['updated_at']
             )
+    
+    def get_video_info(self, url: str) -> Dict[str, Any]:
+        """
+        获取视频信息（不下载）
+        
+        Args:
+            url: 视频URL
+            
+        Returns:
+            视频信息字典
+        """
+        return self.downloader.get_video_info(url)
     
     def cancel_job(self, job_id: str) -> bool:
         """

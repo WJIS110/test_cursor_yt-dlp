@@ -23,6 +23,10 @@ YT_DLP_OPTIONS = {
     'writesubtitles': False,
     'writeautomaticsub': False,
     'ignoreerrors': True,
+    'no_warnings': False,  # 显示警告以便调试
+    'extract_flat': False,
+    'cookiefile': None,  # 可以设置 cookie 文件路径
+    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
 }
 
 # 支持的格式选项
