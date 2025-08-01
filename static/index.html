@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Video Downloader</h1>
+            <p>使用 yt-dlp 下載影片和音訊</p>
+        </header>
+
+        <main>
+            <!-- 下載表單區域 -->
+            <section class="download-section">
+                <h2>下載影片</h2>
+                <form id="downloadForm">
+                    <div class="form-group">
+                        <label for="videoUrl">影片連結:</label>
+                        <input 
+                            type="url" 
+                            id="videoUrl" 
+                            name="url" 
+                            placeholder="https://www.youtube.com/watch?v=..." 
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="formatType">下載格式:</label>
+                        <select id="formatType" name="format_type">
+                            <option value="best">最佳品質</option>
+                            <option value="mp4">MP4 影片</option>
+                            <option value="mp3">MP3 音訊</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="infoBtn">獲取資訊</button>
+                        <button type="submit" id="downloadBtn">開始下載</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 影片資訊顯示區域 -->
+            <section class="info-section" id="infoSection" style="display: none;">
+                <h3>影片資訊</h3>
+                <div id="videoInfo"></div>
+            </section>
+
+            <!-- 狀態訊息區域 -->
+            <section class="status-section">
+                <div id="statusMessage"></div>
+            </section>
+
+            <!-- 已下載檔案列表 -->
+            <section class="files-section">
+                <h2>已下載檔案</h2>
+                <button id="refreshFilesBtn">重新整理</button>
+                <div id="filesList">
+                    <p>載入中...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>本工具僅供個人學習使用，請遵守相關版權法規</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
