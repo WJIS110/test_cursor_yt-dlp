@@ -4,11 +4,14 @@ A simple web interface for downloading videos and audio from various platforms u
 
 ## Features
 
-- Download videos from YouTube, SoundCloud, Vimeo, and other supported platforms
-- Extract audio-only downloads
-- Simple web interface
-- Local network access
-- Built with FastAPI for easy integration
+- 🎥 Download videos from YouTube, SoundCloud, Vimeo, and other supported platforms
+- 🎵 Extract audio-only downloads in MP3 format
+- 📊 Get video information without downloading
+- 📁 File management (list, download, delete)
+- 🌐 RESTful API with OpenAPI documentation
+- 🔧 Multiple quality options (720p, 480p, best quality)
+- 🖥️ Local network access for home/office use
+- ⚡ Built with FastAPI for high performance
 
 ## Quick Start
 
@@ -26,14 +29,27 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 - API Documentation: http://localhost:8000/docs
 - Health Check: http://localhost:8000/health
 
+## API Endpoints
+
+- `POST /api/v1/info` - Get video information
+- `POST /api/v1/download` - Download video/audio
+- `GET /api/v1/formats` - List available formats
+- `GET /files/` - List downloaded files
+- `GET /files/{filename}` - Download file
+- `DELETE /files/{filename}` - Delete file
+
 ## Project Structure
 
 ```
 ├── app/
-│   ├── main.py      # FastAPI application
-│   ├── config.py    # Configuration settings
+│   ├── main.py      # FastAPI application entry point
+│   ├── config.py    # Configuration and settings
+│   ├── models.py    # Pydantic data models
+│   ├── services.py  # yt-dlp integration service
+│   ├── routers.py   # API route handlers
 │   └── __init__.py  # Package init
-├── requirements.txt # Dependencies
+├── downloads/       # Downloaded files directory
+├── requirements.txt # Project dependencies
 └── README.md       # This file
 ```
 
